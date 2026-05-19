@@ -7,6 +7,7 @@ import { Truck, Wrench, Package } from 'lucide-react';
 export default function Home() {
   const [selectedOption, setSelectedOption] = useState("pickup");
 
+<<<<<<< Updated upstream
   const services = [
     { title: "Pengiriman Kendaraan", image: "/Kendaraan.jpg" },
     { title: "Pengiriman Alat Berat", image: "/Alat_Berat.jpg" },
@@ -17,6 +18,80 @@ export default function Home() {
     { title: "Pengiriman Via Kontainer", image: "/kontainer.jpg" },
     { title: "Pengiriman Via Kapal Kargo", image: "/Kapal_Kargo.jpg" },
   ];
+=======
+  const scrollLeft = () => {
+    if (containerRef.current) {
+      const scrollAmount = containerRef.current.offsetWidth * 0.8;
+      const newX = Math.min(x + scrollAmount, 0);
+      setX(newX);
+    }
+  };
+  
+  const scrollRight = () => {
+    if (containerRef.current) {
+      const scrollAmount = containerRef.current.offsetWidth * 0.8;
+      const newX = Math.max(x - scrollAmount, -width);
+      setX(newX);
+    }
+  };
+  
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => res.json())
+      .then((data) => {
+        const mapped = data.map((item) => ({
+          title: item.title,
+          image: item.image
+            ? `/api/storage/${item.image}`
+            : "/fallback.jpg",
+        }));
+        setServices(mapped);
+      })
+      .catch((err) => console.error("Error fetching services:", err));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/testimonials")
+      .then((res) => res.json())
+      .then((data) => {
+        const mapped = data.map((item) => ({
+          name: item.nama,
+          location: item.asal,
+          rating: item.rating,
+          review: item.testimoni,
+        }));
+        setTestimonials(mapped);
+      })
+      .catch((err) => console.error("Error fetching testimonials:", err));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/gallery")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          const mapped = data.map((item) =>
+            item.image
+              ? `/api/storage/${item.image}`
+              : "/fallback.jpg"
+          );
+          setGalleryImages(mapped);
+        } else {
+          console.error("Data tidak sesuai format:", data);
+        }
+      })
+      .catch((err) => console.error("Error fetching gallery:", err));
+  }, []);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const totalWidth =
+        containerRef.current.scrollWidth - containerRef.current.offsetWidth;
+      setWidth(totalWidth);
+      setX(0); // Reset posisi scroll saat container berubah
+    }
+  }, [galleryImages]);
+>>>>>>> Stashed changes
 
   return (
     <><div className="bg-white text-gray-900 min-h-screen flex flex-col">
