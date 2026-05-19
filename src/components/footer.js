@@ -3,12 +3,27 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
+<<<<<<< Updated upstream
     <footer className="footer">
       <div className="container">
         <div className="footer-top">
           <div className="footer-logo">
             <Image src="/logo.jpg" alt="PT Mitra Jasa Power" width={80} height={60} />
             <p className="footer-vision">
+=======
+    <footer className="footer py-10 bg-gray-900 text-white">
+      <div className="container mx-auto px-6">
+        <div className="footer-top flex flex-wrap justify-between items-start gap-8">
+          <div className="footer-logo space-y-4">
+            <Image
+              src="/logo.jpg"
+              alt="PT Mitra Jasa Power"
+              width={100}
+              height={80}
+              style={{ height: "auto" }}
+            />
+            <p className="text-gray-300 max-w-sm">
+>>>>>>> Stashed changes
               Our vision is to provide convenience and help increase your sales business.
             </p>
             <div className="footer-social">
